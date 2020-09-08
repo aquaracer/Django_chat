@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+</head>
+
+<body>
+{% if user.is_authenticated %}
+    Здравствуйте, {{ user.username }}     <a href="{% url 'chat:logout' %}"> Выйти </a>
+
+    <form method="post">
+        {% csrf_token %}
+        <p><input type="hidden" name="user" value="{{ user.username }}"></p>
+        <p>Сообщение: <input type="text" name="message" maxlength="256"></p>
+        <input type="submit" value="отправить сообщение">
+    </form>
+
+
+{% else %}
+    Здравствуйте,  гость        <a href="{% url 'chat:login' %}"> Войти </a>
+    <a href="{% url 'chat:signup' %}"> Зарегистрироваться </a>
+{% endif %}
+
+
+{% for message in messages %}
+    <h2>{{ message.user }} {{ message.time }} {{ message.messages }}</h2>
+{% endfor %}
+
+
+</body>
+</html>
