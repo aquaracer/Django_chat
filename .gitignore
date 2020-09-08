@@ -128,3 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 secret.py
+/media
+/static
+env
+.idea
+.vscode
